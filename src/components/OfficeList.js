@@ -15,15 +15,28 @@ class OfficeList extends Component {
     this.setState({ newOfficer: e.target.value})
   }
 
+  handleSubmit = e => {
+    e.preventDefault();
+
+    this.setState({ 
+      officers:[...this.state.officers, this.state.newOfficer] ,
+      newOfficer: ''
+    });
+  }
+
   render(){
     return (
-    <>
-      <h1>{this.state.newOfficer}</h1>
+    <form onSubmit={this.handleSubmit}>
       <ul>
         {this.state.officers.map(office => <li key={office}>{office}</li>)}
       </ul>
-      <input type="text" onChange={this.handleInputChange} />
-    </>
+      <input 
+        type="text"
+        onChange={this.handleInputChange} 
+        value={this.state.newOfficer}
+      />
+      <button type="submit">Enviar</button>
+    </form>
     )
   }
 }
