@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function OfficerItem({ officer, onDelete }){
   return (
@@ -9,4 +10,8 @@ function OfficerItem({ officer, onDelete }){
   );
 }
 
+OfficerItem.PropTypes ={
+  officer: PropTypes.string,
+  onDelete: PropTypes.func.isRequired,
+}
 export default OfficerItem;
