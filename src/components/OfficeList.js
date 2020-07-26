@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import OfficerItem from './OfficerItem';
 
 class OfficeList extends Component {
   state={
@@ -24,20 +25,20 @@ class OfficeList extends Component {
     });
   }
 
-  handleDelete = (office) =>{
-    this.setState({ officers: this.state.officers.filter( o => o != office)});
+  handleDelete = (officer) =>{
+    this.setState({ officers: this.state.officers.filter( o => o != officer)});
   }
 
   render(){
     return (
     <form onSubmit={this.handleSubmit}>
       <ul>
-        {this.state.officers.map(office => (
-          <li key={office}>
-            {office}
-            <button onClick={() => this.handleDelete(office)} type="button">Remover</button>
-          </li>
-        ))}
+        {this.state.officers.map(officer => (
+          <OfficerItem 
+            key={officer} 
+            officer={officer}
+            onDelete={() => this.handleDelete(officer)}
+            />))}
       </ul>
       <input 
         type="text"
