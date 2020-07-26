@@ -4,14 +4,23 @@ import OfficerItem from './OfficerItem';
 class OfficeList extends Component {
   state={
     newOfficer: '',
-    officers: [
-      'Angela',
-      'Dwight',
-      'Jim',
-      'Michael',
-      'Pam',
-    ]
+    officers: []
   }
+
+  componentDidMount(){
+    const officers = localStorage.getItem('officers');
+
+    if (officers){
+      this.setState({ officers: JSON.parse(officers)});
+    }
+  }
+
+  componentDidUpdate(_, prevState){
+    if(prevState != this.state.officers){
+      localStorage.setItem('officers', JSON.stringify(this.state.officers))
+    }
+  }
+
   handleInputChange = e =>{
     this.setState({ newOfficer: e.target.value})
   }
